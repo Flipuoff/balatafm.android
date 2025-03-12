@@ -1,0 +1,124 @@
+{
+  "name": "react-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "install-dep": "npm i --no-bin-links",
+    "build": "webpack",
+    "build-prod": "webpack --mode production",
+    "start": "webpack serve --hot --mode development"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "5.88.2",
+    "webpack-cli": "5.1.4",
+    "@babel/preset-react": "7.22.15",
+    "babel-loader": "9.1.3",
+    "@babel/core": "7.22.20",
+    "@babel/preset-env": "7.22.20"
+  }
+}import 'package:flutter/material.dart';
+
+void main() {
+  runApp(AIApp());
+}
+
+class AIApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
+      home: AILearningScreen(),
+    );
+  }
+}
+
+class AILearningScreen extends StatelessWidget {
+  final List<Map<String, String>> sections = [
+    {
+      "title": "Data Access",
+      "content":
+          "The AI architecture should include modules for accessing various types of data sources in real-time. This includes databases, APIs, and sensor data. To ensure seamless access to information, the architecture needs to integrate data retrieval mechanisms."
+    },
+    {
+      "title": "Learning Algorithms",
+      "content":
+          "Incorporating machine learning algorithms is essential for enabling the AI to learn from the accessed data. The architecture needs to implement algorithms for tasks like regression, classification, clustering, and reinforcement learning. This facilitates continuous learning and adaptation."
+    },
+    {
+      "title": "Memory Mechanism",
+      "content":
+          "To retain learned knowledge and patterns, the architecture should include a memory mechanism. This mechanism stores and retrieves relevant information, allowing the AI to build upon previous experiences and make informed decisions."
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("AI Architecture")),
+      body: ListView.builder(
+        padding: EdgeInsets.all(10),
+        itemCount: sections.length,
+        itemBuilder: (context, index) {
+          return ExpansionTile(
+            title: Text(
+              sections[index]["title"]!,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  sections[index]["content"]!,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}flutter --version
+flutter create ai_learning_app
+#!/bin/bash
+
+# AI Learning Sections
+declare -A sections
+sections["Data Access"]="The AI architecture should include modules for accessing various types of data sources in real-time. This includes databases, APIs, and sensor data. To ensure seamless access to information, the architecture needs to integrate data retrieval mechanisms."
+sections["Learning Algorithms"]="Incorporating machine learning algorithms is essential for enabling the AI to learn from the accessed data. The architecture needs to implement algorithms for tasks like regression, classification, clustering, and reinforcement learning. This facilitates continuous learning and adaptation."
+sections["Memory Mechanism"]="To retain learned knowledge and patterns, the architecture should include a memory mechanism. This mechanism stores and retrieves relevant information, allowing the AI to build upon previous experiences and make informed decisions."
+
+# Function to display menu
+display_menu() {
+    echo "===================================="
+    echo "     AI Real-Time Learning CLI      "
+    echo "===================================="
+    echo "Select a topic to learn more:"
+    local i=1
+    for key in "${!sections[@]}"; do
+        echo "$i) $key"
+        ((i++))
+    done
+    echo "0) Exit"
+    echo "===================================="
+}
+
+# Function to display section content
+display_content() {
+    local selection=$1
+    local i=1
+    for key in "${!sections[@]}"; do
+        if [[ "$i" == "$selection" ]]; then
+            clear
+            echo "===================================="
+            echo "
